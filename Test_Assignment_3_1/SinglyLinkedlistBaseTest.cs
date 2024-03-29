@@ -85,6 +85,38 @@ namespace Test_Assignment_3
             Assert.AreEqual(0, sll.Size()); // Check if size is zero after clearing
         }
 
+        [Test]
+        public void TestDelete()
+        {
+            sll.Append(1);
+            sll.Append(2);
+
+            sll.Delete(0);
+            Assert.AreEqual(1, sll.Size());
+        }
+
+        [Test]
+        public void TestRetrieve()
+        {
+            sll.Append(1);
+            Assert.AreEqual(1, sll.Retrieve(0));
+        }
+
+        [Test]
+        public void TestContain()
+        {
+            sll.Append(1);
+            Assert.IsTrue(sll.Contains(1));
+        }
+
+        [Test]
+        public void TestIndexOf()
+        {
+            sll.Append(1);
+            sll.Append(2);
+            Assert.AreEqual(1, sll.IndexOf(0));
+        }
+
 
     }
 }
