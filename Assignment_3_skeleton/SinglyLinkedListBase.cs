@@ -1,9 +1,11 @@
-﻿namespace Assignment_3_skeleton
+using System;
+
+namespace Assignment_3_skeleton
 {
     public class SinglyLinkedListBase : ILinkedListADT
     {
 
-        //Define reference to the firts node
+        /        //Define reference to the firts node
         private Node head;
         private int listSize;
 
@@ -75,6 +77,98 @@
                 return 0;
             }
             return listSize;
+        }
+
+        public void Insert(object data, int index)
+        {
+            if (index == 0)
+            {
+                Prepend(data);
+            }
+            else if (index == listSize)
+            {
+                Append(data);
+            }
+            else
+            {
+                Node newNode = new Node(data);
+                Node prevNode = GetNodeAtIndex(index - 1);
+                newNode.Next = prevNode.Next;
+                prevNode.Next = newNode;
+                listSize++;
+            }
+        }
+
+        public void Replace(object data, int index)
+        {
+            Node node = GetNodeAtIndex(index);
+            node.Data = data;
+        }
+
+        public void Delete(int index)
+        {
+            if (index == 0)
+            {
+                head = head.Next;
+            }
+            else
+            {
+                Node prevNode = GetNodeAtIndex(index - 1);
+                prevNode.Next = prevNode.Next.Next;
+            }
+            listSize--;
+        }
+
+
+        private Node GetNodeAtIndex(int index)
+        {
+            if (index < 0 || index >= listSize)
+            {
+                throw new IndexOutOfRangeException("Index is out of bounds.");
+            }
+            Node currentNode = head;
+            for (int i = 0; i < index; i++)
+            {
+                currentNode = currentNode.Next;
+            }
+            return currentNode;
+        }
+
+        public Object Retrieve(int index)
+        {
+            if (index < 0 || index >= listSize)
+            {
+                throw new IndexOutOfRangeException("Index is out of bounds.");
+            }
+
+            Node currentNode = head;
+            for (int i = 0; i < index; i++)
+            {
+                currentNode = currentNode.Next;
+            }
+            return currentNode.Data != null ? currentNode.Data : null;
+        }
+
+        public int IndexOf(Object data)
+        {
+            int index = 0;
+            Node currentNode = head;
+
+            while (currentNode != null)
+            {
+                if ((currentNode.Data == null && data == null) || (currentNode.Data != null && currentNode.Data.Equals(data)))
+                {
+                    return index;
+                }
+                currentNode = currentNode.Next;
+                index++;
+            }
+            return -1;
+        }
+
+        public bool Contains(Object data)
+        {
+            return IndexOf(data) != -1;
         }
     }
 }
