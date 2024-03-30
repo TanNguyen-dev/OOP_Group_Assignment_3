@@ -9,9 +9,7 @@ namespace Test_Assignment_3
 {
     public class SinglyLinkedListBaseTest
     {
-        private List<User> users;
-        private SinglyLinkedListBase sll;
-        private readonly string testFileName = @"..\..\test_users.bin";
+       private SinglyLinkedListBase sll;
 
         [SetUp]
         public void Setup()
@@ -22,25 +20,21 @@ namespace Test_Assignment_3
         [TearDown]
         public void TearDown()
         {
-            this.users.Clear();
+            sll.Clear(); // Clear the list after each test
         }
 
-        //Test the linked list is empty.
         [Test]
         public void TestIsEmpty1()
         {
-            Assert.True(sll.IsEmpty());
+            Assert.IsTrue(sll.IsEmpty());
         }
 
-        //Test the linked list is empty.
         [Test]
         public void TestIsEmpty2()
         {
             Assert.AreEqual(0, sll.Size());
         }
 
-
-        //Test to check the size.
         [Test]
         public void TestSize()
         {
@@ -59,7 +53,7 @@ namespace Test_Assignment_3
             sll.Append(2);
             sll.Append(3);
 
-            Assert.AreEqual(3, sll.Size()); // Check size after appending elements
+            Assert.AreEqual(3, sll.Size());
         }
 
         [Test]
@@ -69,7 +63,7 @@ namespace Test_Assignment_3
             sll.Prepend(2);
             sll.Prepend(3);
 
-            Assert.AreEqual(3, sll.Size()); // Check size after prepending elements
+            Assert.AreEqual(3, sll.Size());
         }
 
         [Test]
@@ -81,8 +75,8 @@ namespace Test_Assignment_3
 
             sll.Clear();
 
-            Assert.IsTrue(sll.IsEmpty()); // Check if the list is empty after clearing
-            Assert.AreEqual(0, sll.Size()); // Check if size is zero after clearing
+            Assert.IsTrue(sll.IsEmpty());
+            Assert.AreEqual(0, sll.Size());
         }
 
         [Test]
@@ -114,9 +108,7 @@ namespace Test_Assignment_3
         {
             sll.Append(1);
             sll.Append(2);
-            Assert.AreEqual(1, sll.IndexOf(0));
+            Assert.AreEqual(0, sll.IndexOf(1));
         }
-
-
     }
 }
